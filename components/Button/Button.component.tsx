@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 const Button: FC = () => {
   return (
     <button>
-      <span>Button</span>
+      <span>Button 2</span>
     </button>
   )
 }
