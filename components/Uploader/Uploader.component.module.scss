@@ -1,0 +1,49 @@
+.inputWrapper {
+  border: 1px dashed #d0d0d0;
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+
+  * {
+    pointer-events: none;
+  }
+
+  img {
+    display: block;
+    width: 40px;
+    margin-bottom: 16px;
+  }
+
+  input {
+    display: none;
+  }
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.active {
+  border-color: transparent;
+  transform: scale(1.05);
+  background-color: blue;
+}
+
+.coverInput {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

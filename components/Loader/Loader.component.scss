@@ -1,0 +1,20 @@
+$loader-color: #2f37ae;
+
+.loader {
+  width: 24px;
+
+  svg {
+    width: 100%;
+    display: block;
+    animation: rotation 1s infinite linear;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

@@ -1,0 +1,51 @@
+@use '../../styles/colors.style.modules.scss';
+
+.button {
+  position: relative;
+  display: inline-block;
+  border: none;
+  border-radius: 4px !important;
+  padding: 12px 18px;
+  background-color: colors.$lightGray;
+  font-size: inherit;
+  font-family: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: inherit;
+  }
+
+  &.primary {
+    background-color: colors.$primary;
+    color: white;
+  }
+
+  &.secondary {
+    border: 1px solid colors.$primary;
+    background-color: transparent;
+    color: colors.$primary;
+  }
+}
+
+.contentWrapper {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loadingWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.compact {
+  padding: 6px 8px;
+}

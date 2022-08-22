@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+  font-size: small;
+}
+
+.header {
+  font-weight: bold;
+}
+
+.separator {
+  grid-column: 1/-1;
+  background-color: gray;
+  height: 1px;
+}
+
+.loadingState {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.emptyState {
+  padding: 24px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
