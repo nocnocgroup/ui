@@ -174,6 +174,7 @@ const Input: FC<{
               max={max}
               step={step}
               disabled={disabled}
+              lang="en-US"
             />)}
             {
               (clearable || options) && <i

@@ -1,13 +1,13 @@
 @use '../../styles/colors.style.modules.scss';
 
 .textArea {
-  padding: 12px;
+  padding: 6px 12px 4px 12px;
   
   button {
     padding: 4px 8px;
-    margin: 4px;
+    margin: 2px;
     background-color: white;
-    border: 1px solid lightgray;
+    border: 1px solid transparent;
     border-radius: 4px;
     transform: all 0.2s ease-in-out !important;
   }
@@ -70,8 +70,6 @@
 }
 
 .active {
-  background-color: colors.$primary !important;
-  color: white;
   border-color: colors.$primary !important;
 }
 

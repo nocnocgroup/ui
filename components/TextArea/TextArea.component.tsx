@@ -4,6 +4,18 @@ import StarterKit from '@tiptap/starter-kit'
 
 import inputStyles from '../Input/Input.component.module.scss'
 
+import h1Icon from './h1.TextArea.component.svg'
+import h2Icon from './h2.TextArea.component.svg'
+import h3Icon from './h3.TextArea.component.svg'
+import boldIcon from './bold.TextArea.component.svg'
+import italicIcon from './italic.TextArea.component.svg'
+import pIcon from './p.TextArea.component.svg'
+import brIcon from './br.TextArea.component.svg'
+import ulIcon from './ul.TextArea.component.svg'
+import olIcon from './ol.TextArea.component.svg'
+import quoteIcon from './quote.TextArea.component.svg'
+import clearIcon from './clear.TextArea.component.svg'
+import hlIcon from './hl.TextArea.component.svg'
 import styles from './TextArea.component.module.scss'
 
 const MenuBar: FC<{ editor: Editor | null }> = ({ editor }) => {
@@ -11,6 +23,7 @@ const MenuBar: FC<{ editor: Editor | null }> = ({ editor }) => {
     return null
   }
 
+  // in case we want to set underline: https://tiptap.dev/api/marks/underline
   return (
     <>
       <button
@@ -19,7 +32,7 @@ const MenuBar: FC<{ editor: Editor | null }> = ({ editor }) => {
           editor.isActive('heading', { level: 1 }) ? styles.active : ''
         }
       >
-        h1
+        <img src={h1Icon} alt="Header 1" title="Header 1" />
       </button>
       <button
         onClick={() => editor.chain().toggleHeading({ level: 2 }).run()}
@@ -27,7 +40,7 @@ const MenuBar: FC<{ editor: Editor | null }> = ({ editor }) => {
           editor.isActive('heading', { level: 2 }) ? styles.active : ''
         }
       >
-        h2
+        <img src={h2Icon} alt="Header 2" title="Header 2" />
       </button>
       <button
         onClick={() => editor.chain().toggleHeading({ level: 3 }).run()}
@@ -35,64 +48,54 @@ const MenuBar: FC<{ editor: Editor | null }> = ({ editor }) => {
           editor.isActive('heading', { level: 3 }) ? styles.active : ''
         }
       >
-        h3
-      </button>
-      <button
-        onClick={() => editor.chain().toggleHeading({ level: 4 }).run()}
-        className={
-          editor.isActive('heading', { level: 4 }) ? styles.active : ''
-        }
-      >
-        h4
-      </button>
-      <button
-        onClick={() => editor.chain().toggleBold().run()}
-        className={editor.isActive('bold') ? styles.active : ''}
-      >
-        bold
-      </button>
-      <button
-        onClick={() => editor.chain().toggleItalic().run()}
-        className={editor.isActive('italic') ? styles.active : ''}
-      >
-        italic
+        <img src={h3Icon} alt="Header 3" title="Header 2" />
       </button>
       <button
         onClick={() => editor.chain().setParagraph().run()}
         className={editor.isActive('paragraph') ? styles.active : ''}
       >
-        paragraph
+        <img src={pIcon} alt="Paragraph" title="Paragraph" />
+      </button>
+      <button
+        onClick={() => editor.chain().toggleBold().run()}
+        className={editor.isActive('bold') ? styles.active : ''}
+      >
+        <img src={boldIcon} alt="Bold" title="Bold" />
+      </button>
+      <button
+        onClick={() => editor.chain().toggleItalic().run()}
+        className={editor.isActive('italic') ? styles.active : ''}
+      >
+        <img src={italicIcon} alt="Italic" title="Italic" />
       </button>
       <button
         onClick={() => editor.chain().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? styles.active : ''}
       >
-        bullet list
+        <img src={ulIcon} alt="Unordered list" title="Unordered list" />
       </button>
       <button
         onClick={() => editor.chain().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? styles.active : ''}
       >
-        ordered list
+        <img src={olIcon} alt="Ordered list" title="Ordered list" />
       </button>
       <button
         onClick={() => editor.chain().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? styles.active : ''}
       >
-        blockquote
+        <img src={quoteIcon} alt="Quote" title="Quote" />
       </button>
       <button onClick={() => editor.chain().setHorizontalRule().run()}>
-        vertical line
+        <img src={hlIcon} alt="Horizontal line" title="Horizontal line" />
       </button>
       <button onClick={() => editor.chain().setHardBreak().run()}>
-        line break
+        <img src={brIcon} alt="New line" title="New line" />
       </button>
-      <button onClick={() => editor.chain().unsetAllMarks().run()}>
-        clear formating
+      <button onClick={() => editor.chain().unsetAllMarks().clearNodes().run()}>
+        <img src={clearIcon} alt="Clear format" title="Clear format" />
       </button>
-      <button onClick={() => editor.chain().clearNodes().run()}>
-        clear elements
-      </button>
+      <hr style={{ marginTop: '8px', marginBottom: '0' }} />
     </>
   )
 }

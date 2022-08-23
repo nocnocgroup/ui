@@ -13,19 +13,19 @@ import styles from './Uploader.component.module.scss'
 
 export const getFileArray = (
   fileList: FileList | null,
-  validate?: (f: File) => { isValid: boolean, message?: string }
+  validate?: (f: File) => string | null | undefined
 ) => {
   const validFiles = []
   if (fileList && fileList[0]) {
     for (let index = 0; index < fileList.length; index++) {
       const file = fileList[index]
-      const validation = validate
+      const validationError = validate
         ? validate(file)
-        : { isValid: true }
-      if (validation.isValid) {
+        : ''
+      if (!validationError) {
         validFiles.push(file)
       } else {
-        alert(validation.message)
+        alert(validationError)
       }
     }
   }
@@ -36,7 +36,7 @@ const Uploader: FC<{
   onChange: (files: File[]) => void,
   accept?: string,
   multiple?: boolean,
-  validate?: (files: File) => { isValid: boolean, message?: string },
+  validate?: (files: File) => string | null | undefined,
   label: string,
   loading?: boolean
 }> = ({
