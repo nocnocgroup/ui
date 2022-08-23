@@ -1,0 +1,80 @@
+@use '../../styles/colors.style.modules.scss';
+
+.textArea {
+  padding: 12px;
+  
+  button {
+    padding: 4px 8px;
+    margin: 4px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    transform: all 0.2s ease-in-out !important;
+  }
+
+  div[contenteditable] {
+    margin-top: 16px;
+    outline: none;
+    min-height: 80px;
+  }
+
+  .ProseMirror {
+    > * + * {
+      margin-top: 0.75em;
+    }
+  
+    ul, ol {
+      padding: 0 1rem;
+    }
+  
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.1;
+    }
+  
+    code {
+      background-color: rgba(#616161, 0.1);
+      color: #616161;
+    }
+  
+    pre {
+      background: #0D0D0D;
+      color: #FFF;
+      font-family: 'JetBrainsMono', monospace;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+  
+      code {
+        color: inherit;
+        padding: 0;
+        background: none;
+        font-size: 0.8rem;
+      }
+    }
+  
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    blockquote {
+      padding-left: 1rem;
+      border-left: 2px solid rgba(#0D0D0D, 0.1);
+    }
+  
+    hr {
+      border: none;
+      border-top: 2px solid rgba(#0D0D0D, 0.1);
+      margin: 2rem 0;
+    }
+  }
+}
+
+.active {
+  background-color: colors.$primary !important;
+  color: white;
+  border-color: colors.$primary !important;
+}
+
+.content {
+  min-height: 300px;
+}

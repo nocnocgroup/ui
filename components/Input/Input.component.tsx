@@ -17,6 +17,9 @@ const Input: FC<{
   icon?: string,
   placeholder?: string,
   clearable?: boolean,
+  step?: number,
+  min?: number,
+  max?: number,
   name?: string,
   disabled?: boolean,
   [key: string]: unknown
@@ -31,8 +34,11 @@ const Input: FC<{
   onEnter,
   icon,
   name,
+  step,
+  min,
+  max,
   placeholder,
-  clearable = true,
+  clearable = false,
   disabled = false,
   ...props
 }) => {
@@ -109,88 +115,68 @@ const Input: FC<{
         `}>
           <label className={styles.innerWrapperLabel}>
             {icon && <i className={`i-${icon}`} />}
-            { type === 'textarea'
-              ? (
-                <textarea
-                  name={name}
-                  onFocus={() => {
-                    setIsFocused(true)
-                  }}
-                  onKeyUp={(event) => {
-                    if (event.key === 'Enter') {
-                      onEnter && onEnter(currentValue)
-                    }
-                  }}
-                  className={`${error ? 'error' : ''}`}
-                  value={currentLabel || currentValue}
-                  placeholder={placeholder}
-                  onChange={(event) => setCurrentValue(event.target.value)}
-                  disabled={disabled}
-                  rows={3}
-                />
-              )
-              : (
-                <input
-                  name={name}
-                  onFocus={() => {
-                    setIsFocused(true)
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Tab') {
-                      setIsFocused(false)
-                    }
-                  }}
+            {(<input
+              name={name}
+              onFocus={() => {
+                setIsFocused(true)
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Tab') {
+                  setIsFocused(false)
+                }
+              }}
 
-                  onKeyUp={(event) => {
-                    if (event.key === 'Enter') {
-                      if (filteredOptions &&
-                        filteredOptions.length > keyboardSelectedIndex) {
-                        const option = filteredOptions[keyboardSelectedIndex]
-                        setCurrentValue(
-                          typeof option === 'string' ? option : option.value
-                        );
-                        (event.target as HTMLInputElement).blur()
-                        setIsFocused(false)
-                      }
-                      onEnter && onEnter(currentValue)
-                    }
+              onKeyUp={(event) => {
+                if (event.key === 'Enter') {
+                  if (filteredOptions &&
+                    filteredOptions.length > keyboardSelectedIndex) {
+                    const option = filteredOptions[keyboardSelectedIndex]
+                    setCurrentValue(
+                      typeof option === 'string' ? option : option.value
+                    );
+                    (event.target as HTMLInputElement).blur()
+                    setIsFocused(false)
+                  }
+                  onEnter && onEnter(currentValue)
+                }
 
-                    if (!filteredOptions || filteredOptions.length === 0) return
+                if (!filteredOptions || filteredOptions.length === 0) return
 
-                    if (event.key === 'Escape') {
-                      (event.target as HTMLInputElement).blur()
-                      setIsFocused(false)
-                    }
+                if (event.key === 'Escape') {
+                  (event.target as HTMLInputElement).blur()
+                  setIsFocused(false)
+                }
 
-                    if (event.key === 'ArrowUp') {
-                      setKeyboardSelectedIndex(prev =>
-                        prev === 0
-                          ? (filteredOptions as Option[]).length - 1
-                          : prev - 1
-                      )
-                    }
-                    if (event.key === 'ArrowDown') {
-                      setKeyboardSelectedIndex(prev =>
-                        prev >= (filteredOptions as Option[]).length - 1
-                          ? 0
-                          : prev + 1
-                      )
-                    }
-                  }}
-                  className={`${error ? 'error' : ''}`}
-                  type={ type || 'text'}
-                  value={currentLabel || currentValue}
-                  placeholder={placeholder}
-                  onChange={(event) => {
-                    setKeyboardSelectedIndex(0)
-                    setCurrentValue(event.target.value)
-                  }}
-                  disabled={disabled}
-                />
-              )
-            }
+                if (event.key === 'ArrowUp') {
+                  setKeyboardSelectedIndex(prev =>
+                    prev === 0
+                      ? (filteredOptions as Option[]).length - 1
+                      : prev - 1
+                  )
+                }
+                if (event.key === 'ArrowDown') {
+                  setKeyboardSelectedIndex(prev =>
+                    prev >= (filteredOptions as Option[]).length - 1
+                      ? 0
+                      : prev + 1
+                  )
+                }
+              }}
+              className={`${error ? 'error' : ''}`}
+              type={ type || 'text'}
+              value={currentLabel || currentValue}
+              placeholder={placeholder}
+              onChange={(event) => {
+                setKeyboardSelectedIndex(0)
+                setCurrentValue(event.target.value)
+              }}
+              min={min}
+              max={max}
+              step={step}
+              disabled={disabled}
+            />)}
             {
-              clearable && <i
+              (clearable || options) && <i
                 style={{
                   opacity: currentValue ? '1' : '0',
                   alignSelf: type === 'textarea' ? 'flex-start' : 'center'
@@ -206,10 +192,6 @@ const Input: FC<{
             {options && <i className={`${styles.clear} i-Down-3`} />}
           </label>
         </div>
-        {description && <div className={styles.description}>{description}</div>}
-        {error &&
-          <div className={styles.errorMessage}>{error}</div>}
-
         {isFocused && !!filteredOptions?.length && (
           <ul className={styles.options}>
             {filteredOptions
@@ -250,6 +232,9 @@ const Input: FC<{
           </ul>
         )}
       </div>
+      {error &&
+        <div className={styles.errorMessage}>{error}</div>}
+      {description && <div className={styles.description}>{description}</div>}
     </div>
   )
 }
