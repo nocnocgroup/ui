@@ -1,40 +1,39 @@
-import React, { FC, ReactNode, useState } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import styles from './Tabs.component.module.scss'
 
 const Tabs: FC<{
   tabs: {
-    key?: string,
+    key: string | number,
     label: string,
     content: ReactNode,
   }[],
+  current: string | number,
+  onChange: (newTab: string | number) => void
   [k: string]: unknown
-}> = ({ tabs, ...props }) => {
-  const [curretTab, setCurrentTab] = useState(0)
-  return (
-    <div { ...props }>
-      <div className={styles.header}>
-        {tabs.map(({ label }, index) => (
-          <div
-            className={`
-              ${styles.label}
-              ${curretTab === index ? styles.active : ''}
-            `}
-            onClick={() => setCurrentTab(index) }
-            key={index}
-          >
-            {label}
-          </div>
-        ))}
-        <div className={styles.headerFiller}>
-
+}> = ({ tabs, current, onChange, ...props }) => (
+  <div { ...props }>
+    <div className={styles.header}>
+      {tabs.map(({ label, key }) => (
+        <div
+          className={`
+            ${styles.label}
+            ${current === key ? styles.active : ''}
+          `}
+          onClick={() => onChange(key) }
+          key={key}
+        >
+          {label}
         </div>
-      </div>
-      <div className={styles.content}>
-        {tabs[curretTab].content}
+      ))}
+      <div className={styles.headerFiller}>
+
       </div>
     </div>
-  )
-}
+    <div className={styles.content}>
+      {tabs.find(tab => tab.key === current)?.content}
+    </div>
+  </div>
+)
 
 export default Tabs
