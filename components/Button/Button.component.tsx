@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader.component'
 import styles from './Button.component.module.scss'
 
 const Button: FC<{
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   primary?: boolean,
   secondary?: boolean,
   children?: ReactNode,
