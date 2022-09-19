@@ -1,0 +1,49 @@
+$pointerSize: 8px;
+$backgrounColor: rgba(0, 0, 0, 0.7);
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  width: max-content;
+  max-width: 600px;
+  bottom: 100%;
+  transform: translateY(-4px) translateX(-10px);
+}
+
+.message {
+  background-color: $backgrounColor;
+  font-size: small;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: initial;
+}
+
+.pointer {
+  width: 0; 
+  height: 0; 
+  border-left: $pointerSize solid transparent;
+  border-right: $pointerSize solid transparent;
+  border-top: $pointerSize solid $backgrounColor;
+  transform: translateX(16px);
+}
+
+// Fade in & out animation
+.enter {
+  opacity: 0;
+}
+.enterActive {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.exit {
+  opacity: 1;
+}
+.exitActive {
+  opacity: 0;
+  transition: opacity 200ms;
+}
