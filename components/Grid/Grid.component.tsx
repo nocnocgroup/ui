@@ -11,7 +11,7 @@ export interface Row {
 }
 
 export interface Column {
-  title?: string
+  title?: string | ReactNode
   field: string | ((row: Row) => PrimitiveValue | ReactNode)
   width?: string
 }
@@ -48,7 +48,6 @@ const Grid: FC<{
       )
       )) || <div className={styles.loadingState}><Loader /></div>
     }
-    < div className={styles.separator} />
   </div>
 )
 

@@ -1,0 +1,97 @@
+.wrapper {
+  position: relative;
+}
+
+.expandButtonWrapper {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #727272;
+  border-radius: 4px !important;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: #727272;
+  outline: none !important;
+}
+
+.active {
+  border-color: #2F37AE;
+  color: #2F37AE;
+}
+
+.expandButtonInner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px 6px 8px;
+}
+
+.clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2F37AE;
+  color: white;
+  width: 32px;
+  position: relative;
+  i {
+    position: absolute;
+    font-style: normal;
+    font-size: large;
+    transform: rotate(45deg);
+  }
+}
+
+.options {
+  position: absolute;
+  border-radius: 4px;
+  padding: 0;
+  border: 1px solid #727272;
+  width: max-content;
+  background-color: white;
+  transform: translateY(8px);
+  z-index: 1;
+}
+
+.option {
+  padding: 12px 16px;
+  list-style: none;
+  display: flex;
+  min-width: 200px;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #E7E7E7;
+  }
+}
+
+.outerRadio {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2F37AE;
+  border-radius: 100px;
+}
+
+.radioSelected {
+  border: 1px solid #2F37AE;
+  background-color: #2F37AE;
+  border-radius: 100px;
+  width: 10px;
+  height: 10px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+}

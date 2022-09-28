@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 
-import Button from '../../Button/Button.component'
+import Button from '../../Button'
 import Grid, { Column, Row } from '../Grid.component'
 import styles from './Paginated.Grid.component.module.scss'
 
@@ -15,6 +15,7 @@ const PaginatedGrid: FC<{
   onPageChange: (page: number, pageSize: number) => void,
   gridKey: (row: Row) => string,
   emptyMessage?: ReactNode,
+  children?: ReactNode,
   [key: string]: unknown
 }> = ({
   columns,
@@ -25,6 +26,7 @@ const PaginatedGrid: FC<{
   pageSize = 100,
   page = 0,
   emptyMessage,
+  children,
   ...props
 }) => {
   const totalPages = Math.ceil(total / pageSize)
@@ -72,6 +74,33 @@ const PaginatedGrid: FC<{
     ))
   }
 
+  const pageAndOptionalActions = (
+    <div className={styles.pageAndOptionalActions}>
+      <div>
+        Items per page:
+        <select
+          value={pageSize}
+          onChange={
+            (event) => onPageChange(0, parseInt(event.target.value))
+          }
+          className={styles.pageSizeSelect}
+        >
+          {itemsPerPage.map((itemPerPage) => (
+            <option
+              key={itemPerPage}
+              value={itemPerPage}
+            >
+              {itemPerPage}
+            </option>
+          ))}
+        </select>
+      </div>
+      {children && <div>
+        { children }
+      </div>}
+    </div>
+  )
+
   return (
     <div {...props}>
       <Grid
@@ -104,25 +133,7 @@ const PaginatedGrid: FC<{
           </div>)
           }
         </div>
-        <div>
-          Items per page:
-          <select
-            value={pageSize}
-            onChange={
-              (event) => onPageChange(0, parseInt(event.target.value))
-            }
-            className={styles.pageSizeSelect}
-          >
-            {itemsPerPage.map((itemPerPage) => (
-              <option
-                key={itemPerPage}
-                value={itemPerPage}
-              >
-                {itemPerPage}
-              </option>
-            ))}
-          </select>
-        </div>
+        {pageAndOptionalActions}
       </div>
     </div>
   )

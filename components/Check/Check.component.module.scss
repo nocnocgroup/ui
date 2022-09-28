@@ -1,0 +1,20 @@
+.label {
+  display: flex !important;
+  width: max-content;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #727272;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #727272;
+}
+
+.checkbox {
+  transform: scale(1.2);
+}
+
+.active {
+  border-color: #2F37AE;
+  color: #2F37AE;
+}
