@@ -27,13 +27,17 @@
  
 }
 
-.closeButton {
-  z-index: 9999;
-  position: sticky;
+.compact {
+  width: 600px;
+}
+
+.close {
+  position: absolute;
   top: 8px;
   right: 8px;
   padding: 8px;
   cursor: pointer;
-  border-radius: 90px !important;
+  font-size: x-large;
+  font-weight: bold;
 }
 

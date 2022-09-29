@@ -4,7 +4,7 @@ import styles from './Select.component.module.scss'
 
 const Select: FC<{
   value: string,
-  options: { label: string, value: string }[],
+  options: { label: string, value: string, disabled?: boolean }[],
   onChange: (value: string) => void,
   children: ReactNode
 }> = ({
@@ -61,8 +61,11 @@ const Select: FC<{
           <li
             value={option.value}
             key={option.value}
-            className={styles.option}
+            className={
+              `${styles.option} ${option.disabled ? styles.disabled : ''}`
+            }
             onClick={() => {
+              if (option.disabled) return
               setExpanded(false)
               onChangeHandler(option.value)
             }}
