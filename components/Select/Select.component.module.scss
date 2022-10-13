@@ -52,6 +52,9 @@
   width: max-content;
   background-color: white;
   transform: translateY(8px);
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 300px;
   z-index: 1;
 }
 
