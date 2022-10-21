@@ -23,8 +23,10 @@
   transform: translateX(-50%); 
   background-color: white;
   border-radius: 8px;
+}
+
+.overflowAuto {
   overflow-y: auto;
- 
 }
 
 .compact {
@@ -35,9 +37,19 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  padding: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
   cursor: pointer;
-  font-size: x-large;
-  font-weight: bold;
+  font-size: xx-large;
+  transform: rotate(45deg);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: antiquewhite;
+  }
 }
 
