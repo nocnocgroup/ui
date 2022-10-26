@@ -31,17 +31,19 @@ const InfinitGrid: FC<{
         gridKey={rowKey}
         emptyMessage={emptyMessage}
       />
-      {hasMore && <div className={styles.gridBottom}>
-        {loading
-          ? <Loader />
-          : <Button
+      <div className={styles.gridBottom}>
+        {rows && loading && <Loader />}
+        {hasMore && !loading && (
+          <Button
             primary
             compact
             loading={loading}
             onClick={bottomReachHandler}
-          >Load more items</Button>
-        }
-      </div>}
+          >
+            Load more items
+          </Button>
+        )}
+      </div>
     </>
   )
 }
