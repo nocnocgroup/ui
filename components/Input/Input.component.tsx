@@ -21,6 +21,7 @@ const Input: FC<{
   min?: number,
   max?: number,
   name?: string,
+  noSort?: boolean,
   disabled?: boolean,
   [key: string]: unknown
 }> = ({
@@ -39,6 +40,7 @@ const Input: FC<{
   max,
   placeholder,
   clearable = false,
+  noSort = false,
   disabled = false,
   ...props
 }) => {
@@ -80,11 +82,13 @@ const Input: FC<{
     )
   }
 
-  filteredOptions?.sort((a, b) => {
-    const aLabel = typeof a === 'string' ? a : a.label
-    const bLabel = typeof b === 'string' ? b : b.label
-    return aLabel.toLowerCase() > bLabel.toLowerCase() ? -1 : 1
-  })
+  if (!noSort) {
+    filteredOptions?.sort((a, b) => {
+      const aLabel = typeof a === 'string' ? a : a.label
+      const bLabel = typeof b === 'string' ? b : b.label
+      return aLabel.toLowerCase() > bLabel.toLowerCase() ? -1 : 1
+    })
+  }
 
   const currentOption = options?.find(
     (option) => typeof option === 'string'
@@ -196,12 +200,6 @@ const Input: FC<{
         {isFocused && !!filteredOptions?.length && (
           <ul className={styles.options}>
             {filteredOptions
-              .sort((option) => {
-                const label =
-                  (typeof option === 'string' ? option : option.label)
-                    .toLowerCase()
-                return label.startsWith(currentValue.toLowerCase()) ? -1 : 1
-              })
               .map((option, index) => {
                 const value = typeof option === 'string' ? option : option.value
                 const label = typeof option === 'string' ? option : option.label
@@ -223,7 +221,7 @@ const Input: FC<{
                     }}
                   >
                     {label.slice(0, start)}
-                    <b>{currentValue.toLowerCase()}</b>
+                    <b>{label.slice(start, end)}</b>
                     {label.slice(end)}
                   </li>
 
