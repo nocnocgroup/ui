@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import styles from './Card.component.module.scss'
 
-const Card: FC = () => {
+const Card: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
     <div className={styles.card}>
-      <span>Card</span>
+      {children}
     </div>
   )
 }
