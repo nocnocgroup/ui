@@ -4,9 +4,10 @@ import styles from './Tabs.component.module.scss'
 
 const Tabs: FC<{
   tabs: {
-    key: string | number,
-    label: string,
-    content: ReactNode,
+    key: string | number
+    label: ReactNode
+    content: ReactNode
+    disabled?: boolean
   }[],
   current: string | number,
   onChange: (newTab: string | number) => void
@@ -14,16 +15,21 @@ const Tabs: FC<{
 }> = ({ tabs, current, onChange, ...props }) => (
   <div { ...props }>
     <div className={styles.header}>
-      {tabs.map(({ label, key }) => (
+      {tabs.map(({ label, key, disabled }) => (
         <div
           className={`
             ${styles.label}
             ${current === key ? styles.active : ''}
           `}
-          onClick={() => onChange(key) }
+          onClick={() => !disabled && onChange(key) }
           key={key}
         >
-          {label}
+          <div className={`
+            ${styles.labelContent}
+            ${disabled ? styles.disabled : ''}
+          `}>
+            {label}
+          </div>
         </div>
       ))}
       <div className={styles.headerFiller}>

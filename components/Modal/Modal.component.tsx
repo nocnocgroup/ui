@@ -3,13 +3,13 @@ import React, { FC, useEffect } from 'react'
 import styles from './Modal.component.module.scss'
 
 const Modal: FC<{
-  show: boolean,
+  show?: boolean,
   compact?: boolean
   overflowAuto?: boolean,
-  children: React.ReactNode,
-  onDismiss: () => void
+  children?: React.ReactNode,
+  onDismiss?: () => void
 }> = ({
-  show,
+  show = true,
   onDismiss,
   compact = false,
   overflowAuto = true,
@@ -22,7 +22,7 @@ const Modal: FC<{
   useEffect(() => {
     const keyupHandler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onDismiss()
+        onDismiss && onDismiss()
       }
     }
     document.addEventListener('keyup', keyupHandler)
@@ -34,14 +34,15 @@ const Modal: FC<{
 
   return (
     <>
-      <div className={styles.modalOverlay} onClick={onDismiss}></div>
+      <div className={styles.modalOverlay} onClick={onDismiss} />
       <div className={`
         ${styles.modal}
         ${compact ? styles.compact : ''}
         ${overflowAuto ? styles.overflowAuto : ''}
       `}>
         <div className={styles.contentWrapper}>
-          <div className={styles.close} onClick={onDismiss}>+</div>
+          {onDismiss &&
+            <div className={styles.close} onClick={onDismiss}>+</div>}
           {children}
         </div>
       </div>

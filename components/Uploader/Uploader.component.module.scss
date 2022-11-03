@@ -10,6 +10,7 @@
   position: relative;
   overflow: hidden;
   text-align: center;
+  cursor: pointer;
 
   * {
     pointer-events: none;
@@ -26,7 +27,7 @@
   }
 
   &:hover {
-    background-color: lightgray;
+    background-color: #efefef;
   }
 }
 
