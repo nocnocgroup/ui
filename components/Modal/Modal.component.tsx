@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, CSSProperties } from 'react'
 
 import styles from './Modal.component.module.scss'
 
@@ -7,13 +7,17 @@ const Modal: FC<{
   compact?: boolean
   overflowAuto?: boolean,
   children?: React.ReactNode,
+  className?: string,
+  style?: CSSProperties
   onDismiss?: () => void
 }> = ({
   show = true,
   onDismiss,
   compact = false,
   overflowAuto = true,
-  children
+  children,
+  className = '',
+  style = {}
 }) => {
   if (!show) {
     return null
@@ -35,16 +39,18 @@ const Modal: FC<{
   return (
     <>
       <div className={styles.modalOverlay} onClick={onDismiss} />
-      <div className={`
-        ${styles.modal}
-        ${compact ? styles.compact : ''}
-        ${overflowAuto ? styles.overflowAuto : ''}
-      `}>
-        <div className={styles.contentWrapper}>
-          {onDismiss &&
-            <div className={styles.close} onClick={onDismiss}>+</div>}
-          {children}
-        </div>
+      <div
+        className={`
+          ${styles.modal}
+          ${compact ? styles.compact : ''}
+          ${overflowAuto ? styles.overflowAuto : ''}
+          ${className}
+        `}
+        style={style}
+      >
+        {onDismiss &&
+          <div className={styles.close} onClick={onDismiss}>+</div>}
+        {children}
       </div>
     </>
   )
