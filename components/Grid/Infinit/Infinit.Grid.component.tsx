@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
+
 import Button from '../../Button'
 import Loader from '../../Loader'
-
 import Grid, { Column, Row } from '../Grid.component'
 
 import styles from './Infinit.Grid.component.module.scss'

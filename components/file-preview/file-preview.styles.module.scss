@@ -1,0 +1,28 @@
+@use '../../styles/colors.style.modules.scss';
+
+.fileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid colors.$secondary;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.formatIcon {
+  width: 40px;
+  opacity: .5;
+}
+
+.fileInfoWrapper {
+  flex-grow: 1;
+}
+
+.fileName {
+  font-weight: bold;
+  font-size: large;
+}
+
+.fileSize {
+  color: darkgray;
+}

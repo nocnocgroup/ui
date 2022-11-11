@@ -1,0 +1,29 @@
+@use '../../styles/colors.style.modules.scss';
+
+.notice {
+  position: relative;
+  display: flex;
+  gap: 32px;
+  padding: 16px 16px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  align-items: center;
+  border-left: 4px solid black;
+
+}
+
+.info {
+  border-left-color: colors.$secondary;
+  background-color: #f7f7f7;
+}
+
+.warn {
+  border-left-color: #fffb00;
+  background-color: #fff9d6;
+}
+
+.error {
+  border-left-color: red;
+  background-color: #ffe2e2;
+  color: red;
+}

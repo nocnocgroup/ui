@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react'
 
 import Button from '../../Button'
 import Grid, { Column, Row } from '../Grid.component'
+
 import styles from './Paginated.Grid.component.module.scss'
 
 const itemsPerPage = [10, 25, 50, 100, 500]
