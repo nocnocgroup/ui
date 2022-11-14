@@ -8,7 +8,7 @@ const Modal: FC<{
   overflowAuto?: boolean,
   children?: React.ReactNode,
   className?: string,
-  closeBlack?: boolean
+  closeWhite?: boolean
   style?: CSSProperties
   onDismiss?: () => void
 }> = ({
@@ -18,7 +18,7 @@ const Modal: FC<{
   overflowAuto = true,
   children,
   className = '',
-  closeBlack = false,
+  closeWhite = false,
   style = {}
 }) => {
   if (!show) {
@@ -52,7 +52,7 @@ const Modal: FC<{
       >
         {onDismiss &&
           <div
-            className={`${styles.close} ${closeBlack ? styles.black : ''}`}
+            className={`${styles.close} ${closeWhite ? styles.black : ''}`}
             onClick={onDismiss}
           >
             +
