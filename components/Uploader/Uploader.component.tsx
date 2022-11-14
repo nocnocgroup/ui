@@ -68,13 +68,13 @@ const Uploader: FC<{
     setDragActive(false)
     const validFiles = getFileArray(e.dataTransfer.files, validate)
     if (validFiles.length === 0) return
-    onChangeHandler(multiple ? validFiles : [validFiles[0]])
+    onChangeHandler(validFiles)
   }
 
   const browseHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     const validFiles = getFileArray(e.target.files, validate)
     if (validFiles.length === 0) return
-    onChangeHandler(multiple ? validFiles : [validFiles[0]])
+    onChangeHandler(validFiles)
   }
 
   return (
