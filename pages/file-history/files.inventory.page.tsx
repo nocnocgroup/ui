@@ -92,7 +92,7 @@ const InventoryFiles = ({
         style={{ maxWidth: '400px', margin: '16px 0' }}
         placeholder="Select a seller"
         value={sellerIdSelected}
-        onChange={() => setSellerIdSelected}
+        onChange={(v) => setSellerIdSelected(v)}
         options={sellersFilter}
       />}
       <div>
