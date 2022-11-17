@@ -1,11 +1,13 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+import { Stylable } from '../types'
 
 import styles from './Input.component.module.scss'
 
 export type ComplexOption = { value: string, label: string }
 type Option = string | ComplexOption
 
-const Input: FC<{
+interface Props extends Stylable {
   value?: string,
   error?: string,
   options?: Option[],
@@ -22,9 +24,10 @@ const Input: FC<{
   max?: number,
   name?: string,
   noSort?: boolean,
-  disabled?: boolean,
-  [key: string]: unknown
-}> = ({
+  disabled?: boolean
+}
+
+const Input = ({
   value,
   error,
   options,
@@ -42,8 +45,9 @@ const Input: FC<{
   clearable = false,
   noSort = false,
   disabled = false,
-  ...props
-}) => {
+  className = '',
+  style = {}
+}: Props) => {
   const [currentValue, setCurrentValue] = useState(value || '')
   const [isFocused, setIsFocused] = useState(false)
   const [keyboardSelectedIndex, setKeyboardSelectedIndex] = useState(0)
@@ -101,7 +105,7 @@ const Input: FC<{
     : currentOption?.label
 
   return (
-    <div style={{ position: 'relative' }} {...props}>
+    <div style={{ position: 'relative', ...style }} className={className}>
       { isFocused && !!filteredOptions?.length && <div
         className={styles.back}
         onClick={() => { setIsFocused(false) }}

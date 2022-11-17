@@ -1,4 +1,4 @@
-import React, { Key, ReactNode } from 'react'
+import React, { Key, ReactNode, CSSProperties } from 'react'
 
 import Button from '../../Button'
 import Grid, { Column } from '../Grid.component'
@@ -9,14 +9,16 @@ const itemsPerPage = [10, 25, 50, 100, 500]
 
 // TODO: define a className and style interface
 interface Props<T> {
-  columns: Column<T>[],
-  rows: T[] | null,
-  total: number,
-  pageSize: number,
-  page: number,
-  onPageChange: (page: number, pageSize: number) => void,
-  rowKey: (row: T) => Key,
-  emptyMessage?: ReactNode,
+  columns: Column<T>[]
+  rows: T[] | null
+  total: number
+  pageSize: number
+  page: number
+  onPageChange: (page: number, pageSize: number) => void
+  rowKey: (row: T) => Key
+  emptyMessage?: ReactNode
+  style?: CSSProperties
+  className?: string
   children?: ReactNode
 }
 
@@ -29,8 +31,9 @@ const PaginatedGrid = <T, >({
   pageSize = 100,
   page = 0,
   emptyMessage,
-  children,
-  ...props
+  style = {},
+  className = '',
+  children
 }: Props<T>) => {
   const totalPages = Math.ceil(total / pageSize)
 
@@ -105,7 +108,7 @@ const PaginatedGrid = <T, >({
   )
 
   return (
-    <div {...props}>
+    <div style={style} className={className}>
       <Grid
         columns={columns}
         rows={rows}

@@ -4,6 +4,7 @@ import axios from 'axios'
 import axiosMod from '../../../utils/nextwork.utils'
 import InfinitGrid from '../../components/Grid/Infinit'
 import Notice, { NoticeType } from '../../components/notice'
+import Input, { ComplexOption } from '../../components/Input'
 
 import FileLinesModal
   from './modal/modal.files.inventory'
@@ -15,23 +16,28 @@ const LIMIT = 100
 
 interface Props {
   t: (k: string) => string
-  filterBySeller?: boolean
+  sellersFilter?: ComplexOption[]
 }
 
 const InventoryFiles = ({
-  t,
-  filterBySeller = false
+  sellersFilter,
+  t
 }: Props) => {
-  const [fileList, setFileList] = useState<File[] | null>(null)
+  const [fileList, setFileList] = useState<File[] | null>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [sellerIdSelected, setSellerIdSelected] = useState('')
   const [hasMore, setHasMore] = useState(false)
   const [lastKey, setLastKey] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
+    console.log('HERE')
+    console.log({ sellersFilter })
+    if (sellersFilter && !(sellerIdSelected || 25)) return
+
     fetchFiles()
-  }, [])
+  }, [sellerIdSelected])
 
   const fetchFiles = async () => {
     try {
@@ -39,7 +45,13 @@ const InventoryFiles = ({
       setError(null)
       const response = await axiosMod.get(
         '/inventory/files',
-        { params: { limit: LIMIT, fromId: lastKey } }
+        {
+          params: {
+            limit: LIMIT,
+            fromId: lastKey,
+            seller: '25' || sellerIdSelected
+          }
+        }
       )
       const newFetchedFiles = response.data.files
       setHasMore(newFetchedFiles.length >= LIMIT)
@@ -78,7 +90,13 @@ const InventoryFiles = ({
         style={{ marginBottom: '24px' }}
         type={NoticeType.ERROR}
       >{error}</Notice>}
-      { filterBySeller ? 'here goes the filter' : ''}
+      { sellersFilter && <Input
+        style={{ maxWidth: '400px', margin: '16px 0' }}
+        placeholder="Select a seller"
+        value={sellerIdSelected}
+        onChange={() => setSellerIdSelected}
+        options={sellersFilter}
+      />}
       <div>
         <InfinitGrid
           columns={columns}
