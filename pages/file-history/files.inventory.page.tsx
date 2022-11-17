@@ -32,9 +32,7 @@ const InventoryFiles = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
-    console.log('HERE')
-    console.log({ sellersFilter })
-    if (sellersFilter && !(sellerIdSelected || 25)) return
+    if (sellersFilter && !sellerIdSelected) return setFileList([])
 
     fetchFiles()
   }, [sellerIdSelected])
@@ -49,7 +47,7 @@ const InventoryFiles = ({
           params: {
             limit: LIMIT,
             fromId: lastKey,
-            seller: '25' || sellerIdSelected
+            seller: sellerIdSelected
           }
         }
       )
