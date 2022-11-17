@@ -32,8 +32,6 @@ const InventoryFiles = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
-    console.log('HERE')
-    console.log({ sellersFilter })
     if (sellersFilter && !(sellerIdSelected || 25)) return
 
     fetchFiles()
