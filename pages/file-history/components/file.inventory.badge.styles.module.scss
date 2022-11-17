@@ -1,0 +1,32 @@
+.processingBadge,
+.completedBadge,
+.completedWithErrorsBadge,
+.standardBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  font-size: x-small;
+  gap: 6px;
+}
+
+.processingBadge {
+  color: #727272;
+  background-color: rgba(114, 114, 114, 0.1);
+}
+
+.completedBadge {
+  color: #0E671B;
+  background-color: rgba(14, 103, 27, 0.1);
+}
+
+.completedWithErrorsBadge {
+  color: #DB3B21;
+  background-color: rgba(217, 57, 32, 0.1);
+}
+
+.standardBadge {
+  color: #cecece;
+  background-color: rgb(206, 206, 206, 0.1);
+}

@@ -1,54 +1,68 @@
-import React, { FC, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 import Loader from '../Loader/Loader.component'
 
 import styles from './Grid.component.module.scss'
 
-export type PrimitiveValue = string | number | boolean | null | undefined
-
-export interface Row {
-  [key: string]: PrimitiveValue
-}
-
-export interface Column {
+// Row default for backward compatibility
+export interface Column<T> {
   title?: string | ReactNode
-  field: string | ((row: Row) => PrimitiveValue | ReactNode)
+  field: ((row: T) => ReactNode)
   width?: string
 }
 
-const Grid: FC<{
-  columns: Column[],
-  rows: Row[] | null,
-  gridKey: (row: Row) => string,
+// Row default for backward compatibility
+const Grid = <T, >({ columns, rows, rowKey, emptyMessage }: {
+  columns: Column<T>[],
+  rows: T[] | null,
+  rowKey: (row: T) => React.Key,
   emptyMessage?: ReactNode
-}> = ({ columns, rows, gridKey, emptyMessage }) => (
-  <div
-    className={styles.grid}
-    style={{
-      gridTemplateColumns: columns.map(({ width = '1fr' }) => width).join(' ')
-    }}
-  >
-    {columns.map(({ title }, index) => (
-      <div key={`${title}-${index}`} className={styles.header}>{title}</div>
-    ))}
-    < div className={styles.separator} />
-    {
-      rows && rows.length === 0
-        ? (<div className={styles.emptyState}>
-          {emptyMessage || 'There are no items to show'}
-        </div>)
-        : ''
-    }
-    {
-      rows?.map((row) => columns.map((
-        { field }, columnIndex) => (
-        <div key={`${gridKey(row)} ${columnIndex}`}>
-          {typeof field === 'string' ? row[field] : field(row)}
-        </div>
-      )
-      )) || <div className={styles.loadingState}><Loader /></div>
-    }
-  </div>
-)
+}) => (
+    <table className={styles.grid}>
+      <thead>
+        <tr>
+          {columns.map(({ title, width }, index) => (
+            <th
+              key={`${title}-${index}`}
+              className={styles.cell}
+              style={{ width: width || '' }}
+            >
+              {title}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows && rows.length === 0
+            ? (
+              <tr className={styles.emptyState}>
+                <td colSpan={columns.length}>
+                  {emptyMessage || 'There are no items to show'}
+                </td>
+              </tr>
+            )
+            : undefined
+        }
+        {
+          rows?.map((row) => (
+            <tr key={`${rowKey(row)}`} className={styles.data}>
+              {columns.map(({ field }, columnIndex) => (
+                <td key={columnIndex} className={styles.cell}>{field(row)}</td>
+              ))}
+            </tr>
+          )) || (
+            <tr className={styles.emptyState}>
+              <td colSpan={columns.length}>
+                <div className={styles.loadingState}>
+                  <Loader />
+                </div>
+              </td>
+            </tr>
+          )
+        }
+      </tbody>
+    </table>
+  )
 
 export default Grid

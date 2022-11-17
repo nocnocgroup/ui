@@ -1,0 +1,25 @@
+.modalTitle {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 12px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid lightgray;
+}
+
+.detailsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 24px;
+    gap: 16px;
+    line-height: 0.8em;
+
+    label {
+        font-weight: bold;
+    }
+}
+
+.statusWrapper {
+    display: inline-flex;
+    gap: 8px;
+    margin-left: 8px;
+}

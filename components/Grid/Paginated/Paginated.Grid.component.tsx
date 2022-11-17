@@ -1,35 +1,37 @@
-import React, { FC, ReactNode } from 'react'
+import React, { Key, ReactNode } from 'react'
 
 import Button from '../../Button'
-import Grid, { Column, Row } from '../Grid.component'
+import Grid, { Column } from '../Grid.component'
 
 import styles from './Paginated.Grid.component.module.scss'
 
 const itemsPerPage = [10, 25, 50, 100, 500]
 
-const PaginatedGrid: FC<{
-  columns: Column[],
-  rows: Row[] | null,
+// TODO: define a className and style interface
+interface Props<T> {
+  columns: Column<T>[],
+  rows: T[] | null,
   total: number,
   pageSize: number,
   page: number,
   onPageChange: (page: number, pageSize: number) => void,
-  gridKey: (row: Row) => string,
+  rowKey: (row: T) => Key,
   emptyMessage?: ReactNode,
-  children?: ReactNode,
-  [key: string]: unknown
-}> = ({
+  children?: ReactNode
+}
+
+const PaginatedGrid = <T, >({
   columns,
   rows,
   total,
   onPageChange,
-  gridKey,
+  rowKey,
   pageSize = 100,
   page = 0,
   emptyMessage,
   children,
   ...props
-}) => {
+}: Props<T>) => {
   const totalPages = Math.ceil(total / pageSize)
 
   let pages: number[] = []
@@ -107,7 +109,7 @@ const PaginatedGrid: FC<{
       <Grid
         columns={columns}
         rows={rows}
-        gridKey={gridKey}
+        rowKey={rowKey}
         emptyMessage={emptyMessage}
       />
       <div className={styles.pageActions}>
