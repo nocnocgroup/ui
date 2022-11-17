@@ -24,6 +24,7 @@ interface Props extends Stylable {
   max?: number,
   name?: string,
   noSort?: boolean,
+  onBlur?: () => void
   disabled?: boolean
 }
 
@@ -46,7 +47,8 @@ const Input = ({
   noSort = false,
   disabled = false,
   className = '',
-  style = {}
+  style = {},
+  onBlur
 }: Props) => {
   const [currentValue, setCurrentValue] = useState(value || '')
   const [isFocused, setIsFocused] = useState(false)
@@ -105,7 +107,11 @@ const Input = ({
     : currentOption?.label
 
   return (
-    <div style={{ position: 'relative', ...style }} className={className}>
+    <div
+      className={className}
+      style={{ position: 'relative', ...style }}
+      onBlur={onBlur}
+    >
       { isFocused && !!filteredOptions?.length && <div
         className={styles.back}
         onClick={() => { setIsFocused(false) }}
