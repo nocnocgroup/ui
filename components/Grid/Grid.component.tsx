@@ -11,13 +11,22 @@ export interface Column<T> {
   width?: string
 }
 
-// Row default for backward compatibility
-const Grid = <T, >({ columns, rows, rowKey, emptyMessage }: {
+interface Props<T> {
   columns: Column<T>[],
   rows: T[] | null,
   rowKey: (row: T) => React.Key,
+  loading: boolean,
   emptyMessage?: ReactNode
-}) => (
+}
+
+// Row default for backward compatibility
+const Grid = <T, >({
+  columns,
+  rows,
+  rowKey,
+  loading,
+  emptyMessage
+}: Props<T>) => (
     <table className={styles.grid}>
       <thead>
         <tr>
@@ -34,24 +43,25 @@ const Grid = <T, >({ columns, rows, rowKey, emptyMessage }: {
       </thead>
       <tbody>
         {
-          rows && rows.length === 0
-            ? (
-              <tr className={styles.emptyState}>
-                <td colSpan={columns.length}>
-                  {emptyMessage || 'There are no items to show'}
-                </td>
-              </tr>
-            )
-            : undefined
-        }
-        {
           rows?.map((row) => (
             <tr key={`${rowKey(row)}`} className={styles.data}>
               {columns.map(({ field }, columnIndex) => (
                 <td key={columnIndex} className={styles.cell}>{field(row)}</td>
               ))}
             </tr>
-          )) || (
+          ))
+        }
+        {
+          rows && !rows.length && (
+            <tr className={styles.emptyState}>
+              <td colSpan={columns.length}>
+                {emptyMessage || 'There are no items to show'}
+              </td>
+            </tr>
+          )
+        }
+        {
+          loading && (
             <tr className={styles.emptyState}>
               <td colSpan={columns.length}>
                 <div className={styles.loadingState}>

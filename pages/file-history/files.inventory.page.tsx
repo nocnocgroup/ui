@@ -23,11 +23,10 @@ const InventoryFiles = ({
   sellersFilter,
   t
 }: Props) => {
-  const [fileList, setFileList] = useState<File[] | null>([])
+  const [fileList, setFileList] = useState<File[] | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [sellerIdSelected, setSellerIdSelected] = useState('')
-  const [hasMore, setHasMore] = useState(false)
-  const [lastKey, setLastKey] = useState('')
+  const [lastKey, setLastKey] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
@@ -52,7 +51,6 @@ const InventoryFiles = ({
         }
       )
       const newFetchedFiles = response.data.files
-      setHasMore(newFetchedFiles.length >= LIMIT)
       setLastKey(response.data.last_key)
       setFileList(o => [...(o || []), ...newFetchedFiles])
     } catch (error: unknown) {
@@ -102,11 +100,8 @@ const InventoryFiles = ({
           rowKey={(file) => file.id as string}
           loading={isLoading}
           emptyMessage={t('no_files_to_show')}
-          onBottomReach={() => {
-            fileList &&
-              fetchFiles()
-          }}
-          hasMore={hasMore}
+          onBottomReach={fetchFiles}
+          hasMore={!!lastKey}
         />
         {selectedFile && <FileLinesModal
           file={selectedFile as File}

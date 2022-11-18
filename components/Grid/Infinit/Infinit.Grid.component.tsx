@@ -1,7 +1,6 @@
 import React, { Key, ReactNode } from 'react'
 
 import Button from '../../Button'
-import Loader from '../../Loader'
 import Grid, { Column } from '../Grid.component'
 
 import styles from './Infinit.Grid.component.module.scss'
@@ -30,11 +29,11 @@ const InfinitGrid = <T, >({
       <Grid
         columns={columns}
         rows={rows}
+        loading={loading}
         rowKey={rowKey}
         emptyMessage={emptyMessage}
       />
       <div className={styles.gridBottom}>
-        {rows && loading && <Loader />}
         {hasMore && !loading && (
           <Button
             primary

@@ -12,6 +12,7 @@ interface Props<T> {
   columns: Column<T>[]
   rows: T[] | null
   total: number
+  loading: boolean,
   pageSize: number
   page: number
   onPageChange: (page: number, pageSize: number) => void
@@ -27,6 +28,7 @@ const PaginatedGrid = <T, >({
   rows,
   total,
   onPageChange,
+  loading,
   rowKey,
   pageSize = 100,
   page = 0,
@@ -111,6 +113,7 @@ const PaginatedGrid = <T, >({
     <div style={style} className={className}>
       <Grid
         columns={columns}
+        loading={loading}
         rows={rows}
         rowKey={rowKey}
         emptyMessage={emptyMessage}

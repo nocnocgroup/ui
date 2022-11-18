@@ -11,7 +11,7 @@ import StatusBadge from '../components/file.inventory.badges'
 import { buildFileLinesColumn } from './columns.modal.files.inventory'
 import styles from './files.inventory.modal.styles.module.scss'
 
-const PAGE_LIMIT = 10
+const PAGE_LIMIT = 25
 
 const FileLinesModal: FC<{
   file: File,
@@ -23,8 +23,7 @@ const FileLinesModal: FC<{
   t
 }) => {
   const [fileLines, setFileLines] = useState<Line[] | null>(null)
-  const [hasMore, sethasMore] = useState<boolean | null>(null)
-  const [lastKey, setLastKey] = useState('')
+  const [lastKey, setLastKey] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -47,7 +46,6 @@ const FileLinesModal: FC<{
         setFileLines(
           o => [...(o || []), ...response.data.lines]
         )
-        sethasMore(response.data.lines.length >= PAGE_LIMIT)
         setLastKey(response.data.last_key)
       }
     } catch (error) {
@@ -89,10 +87,10 @@ const FileLinesModal: FC<{
       <InfinitGrid<Line>
         columns={buildFileLinesColumn(t)}
         rows={fileLines}
-        hasMore={hasMore}
+        hasMore={!!lastKey}
         rowKey={(line) => line.line}
         loading={isLoading}
-        onBottomReach={() => fetchLines()}
+        onBottomReach={fetchLines}
         emptyMessage={t('no_file_lines_to_show')}
       />
     </Modal>
