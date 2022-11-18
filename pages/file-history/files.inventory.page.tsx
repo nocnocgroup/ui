@@ -39,6 +39,7 @@ const InventoryFiles = ({
   const fetchFiles = async () => {
     try {
       setIsLoading(true)
+      setFileList(null)
       setError(null)
       const response = await axiosMod.get(
         '/inventory/files',
@@ -61,6 +62,7 @@ const InventoryFiles = ({
           setError(error.message || t('error_loading_files'))
         }
       }
+      setFileList([])
       console.error(error)
     } finally {
       setIsLoading(false)
@@ -71,6 +73,7 @@ const InventoryFiles = ({
     (file: File) => setSelectedFile(file),
     t
   )
+
   return (
     <>
       <div className={styles.headerContainer}>
@@ -86,6 +89,7 @@ const InventoryFiles = ({
         style={{ marginBottom: '24px' }}
         type={NoticeType.ERROR}
       >{error}</Notice>}
+
       { sellersFilter && <Input
         style={{ maxWidth: '400px', margin: '16px 0' }}
         placeholder="Select a seller"
@@ -93,6 +97,7 @@ const InventoryFiles = ({
         onChange={(v) => setSellerIdSelected(v)}
         options={sellersFilter}
       />}
+
       <div>
         <InfinitGrid
           columns={columns}
