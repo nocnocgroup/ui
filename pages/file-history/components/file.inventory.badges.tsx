@@ -17,9 +17,12 @@ const StatusBadge = ({ status }: { status?: Status }) => {
       <img src={processingIcon} alt="" /> processing
     </div>
   case 'COMPLETED':
-  case 'PROCESSED_OK':
     return <div className={styles.completedBadge}>
       <img src={completedIcon} alt="" /> completed
+    </div>
+  case 'PROCESSED_OK':
+    return <div className={styles.completedBadge}>
+      <img src={completedIcon} alt="" /> OK
     </div>
   case 'PROCESSED_WITH_ERRORS':
     return <div className={styles.completedWithErrorsBadge}>
