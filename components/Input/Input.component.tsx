@@ -7,6 +7,8 @@ import styles from './Input.component.module.scss'
 export type ComplexOption = { value: string, label: string }
 type Option = string | ComplexOption
 
+// DEPRECATION WARNING: this will be for input controls,
+// please use the dropdow component
 interface Props extends Stylable {
   value?: string,
   error?: string,
