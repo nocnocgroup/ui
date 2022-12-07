@@ -1,0 +1,22 @@
+.modeSelectorWrapper {
+  margin-bottom: 0 !important;
+  position: relative;
+
+  select {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    appearance: none;
+    border-right: 1px solid #bdbdbd;
+    position: relative;
+    padding-right: 30px;
+  
+  }
+}
+
+.arrowDown {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}

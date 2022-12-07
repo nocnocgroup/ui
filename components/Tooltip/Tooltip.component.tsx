@@ -1,13 +1,15 @@
-import React, { FC, ReactNode, useRef, useState } from 'react'
+import React, { ReactNode, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
+
+import { Stylable } from '../types'
 
 import styles from './Tooltip.component.module.scss'
 
-const Tooltip: FC<{
-  message: string,
+interface Props extends Stylable {
+  message: string
   children?: ReactNode
-  className?: string
-}> = ({ message, children, className = '' }) => {
+}
+const Tooltip = ({ message, children, className = '', style = {} }: Props) => {
   const [show, setShow] = useState(false)
   const tooltip = useRef(null)
 
@@ -50,7 +52,7 @@ const Tooltip: FC<{
         unmountOnExit
         mountOnEnter
       >
-        <div ref={tooltip} className={styles.tooltip}>
+        <div ref={tooltip} className={styles.tooltip} style={style}>
           <div className={styles.message}>{message}</div>
           <div className={styles.pointer} />
         </div>

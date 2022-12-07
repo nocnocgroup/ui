@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 import { Stylable } from '../types'
 
@@ -14,7 +14,7 @@ interface Props extends Stylable {
   error?: string,
   options?: Option[],
   type?: string,
-  label?: string,
+  label?: ReactNode,
   description?: string,
   onChange?: (value: string) => void,
   onEnter?: (value: string) => void,
