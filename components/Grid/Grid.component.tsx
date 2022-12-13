@@ -15,7 +15,7 @@ interface Props<T> {
   columns: Column<T>[],
   rows: T[] | null,
   rowKey: (row: T) => React.Key,
-  loading: boolean,
+  loading?: boolean,
   emptyMessage?: ReactNode
 }
 
@@ -24,10 +24,10 @@ const Grid = <T, >({
   columns,
   rows,
   rowKey,
-  loading,
-  emptyMessage
+  loading = false,
+  emptyMessage = 'There are no items to show'
 }: Props<T>) => (
-    <table className={styles.grid}>
+    <table className={styles.table}>
       <thead>
         <tr>
           {columns.map(({ title, width }, index) => (
@@ -55,7 +55,7 @@ const Grid = <T, >({
           rows && !rows.length && (
             <tr className={styles.emptyState}>
               <td colSpan={columns.length}>
-                {emptyMessage || 'There are no items to show'}
+                {emptyMessage}
               </td>
             </tr>
           )

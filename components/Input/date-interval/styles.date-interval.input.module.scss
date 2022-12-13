@@ -1,3 +1,7 @@
+.outterWrapper {
+  position: relative;
+}
+
 .date {
   appearance: none !important;
   flex-shrink: 1 !important;
@@ -7,4 +11,51 @@
 
 .placeholder {
   color: gray;
+}
+
+.selectorOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  width: 100%;
+  gap: 8px;
+}
+
+.innerWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.selectorsWrapper {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid gray;
+  padding: 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.dateInput {
+  cursor: pointer;
+}
+
+.anytime {
+  color: gray;
+}
+
+.separator {
+  text-align: center;
 }

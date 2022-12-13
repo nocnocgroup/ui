@@ -1,6 +1,6 @@
 @use '../../styles/colors.style.modules.scss';
 
-.grid {
+.table {
   width: 100%;
   font-size: small;
   border-radius: 8px;
@@ -18,11 +18,20 @@
   th {
     color: colors.$primary
   }
+
+  tr {
+    transition: background-color .3s ease-in-out;
+  }
+
+  tr:nth-child(even) {
+    background-color: #F6F6F6;
+  }
+  
+  tr:hover {
+      background-color: rgba(47, 55, 174, .075);
+  }
 }
 
-.data:hover {
-    background-color: rgba(47, 55, 174, .05);
-}
 
 .loadingState {
   display: flex;

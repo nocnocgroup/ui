@@ -58,3 +58,43 @@
   }
 }
 
+// in & out animations
+.modalEnter {
+  top: 1vh;
+  opacity: 0;
+}
+
+.modalEnterActive {
+  opacity: 1;
+  top: 7vh;
+  transition: all 300ms ease-out;
+}
+
+.modalExit {
+  top: 7vh;
+  opacity: 1;
+}
+
+.modalExitActive {
+  top: 1vh;
+  opacity: 0;
+  transition: all 300ms ease-out;
+}
+
+.overlayEnter {
+  opacity: 0;
+}
+
+.overlayEnterActive {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.overlayExit {
+  opacity: 1;
+}
+
+.overlayExitActive {
+  opacity: 0;
+  transition: opacity 200ms;
+}
