@@ -52,7 +52,7 @@ const Grid = <T, >({
           ))
         }
         {
-          rows && !rows.length && (
+          rows && !rows.length && !loading && (
             <tr className={styles.emptyState}>
               <td colSpan={columns.length}>
                 {emptyMessage}
