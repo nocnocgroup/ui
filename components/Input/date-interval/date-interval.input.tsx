@@ -6,6 +6,7 @@ import 'react-day-picker/dist/style.css'
 import inputStyles from '../Input.component.module.scss'
 
 import styles from './styles.date-interval.input.module.scss'
+import calendarIcon from './calendar.svg'
 
 interface Props {
   label?: string
@@ -47,6 +48,7 @@ const DateIntervalInput = ({
                 ${from ? '' : styles.anytime}
               `}
             >
+              <img src={calendarIcon} className={styles.calendarIcon} alt="" />
               {from ? format(from, 'PP') : 'anytime'}
             </div>
             {from && <div
@@ -68,6 +70,7 @@ const DateIntervalInput = ({
                 ${until ? '' : styles.anytime}
               `}
             >
+              <img src={calendarIcon} className={styles.calendarIcon} alt="" />
               {until ? format(until, 'PP') : 'anytime'}
             </div>
             {until && <div

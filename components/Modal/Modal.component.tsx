@@ -22,8 +22,7 @@ const Modal: FC<{
   closeWhite = false,
   style = {}
 }) => {
-  const modal = useRef(null)
-  const modalOverlay = useRef(null)
+  const modalWrapper = useRef(null)
 
   useEffect(() => {
     const keyupHandler = (event: KeyboardEvent) => {
@@ -38,42 +37,35 @@ const Modal: FC<{
     }
   }, [])
 
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [show])
+
   return (
-    <>
-      <CSSTransition
-        nodeRef={modalOverlay}
-        in={show}
-        timeout={200}
-        classNames={{
-          enter: styles.overlayEnter,
-          enterActive: styles.overlayEnterActive,
-          exitActive: styles.overlayExitActive,
-          exit: styles.overlayExit
-        }}
-        unmountOnExit
-        mountOnEnter
+    <CSSTransition
+      nodeRef={modalWrapper}
+      in={show}
+      timeout={250}
+      classNames={{
+        enter: styles.modalEnter,
+        enterActive: styles.modalEnterActive,
+        exitActive: styles.modalExitActive,
+        exit: styles.modalExit
+      }}
+      unmountOnExit
+      mountOnEnter
+    >
+      <div
+        ref={modalWrapper}
+        className={styles.modalWrapper}
+        onClick={onDismiss}
       >
         <div
-          ref={modalOverlay}
-          className={styles.modalOverlay}
-          onClick={onDismiss}
-        />
-      </CSSTransition>
-      <CSSTransition
-        nodeRef={modal}
-        in={show}
-        timeout={300}
-        classNames={{
-          enter: styles.modalEnter,
-          enterActive: styles.modalEnterActive,
-          exitActive: styles.modalExitActive,
-          exit: styles.modalExit
-        }}
-        unmountOnExit
-        mountOnEnter
-      >
-        <div
-          ref={modal}
+          onClick={event => event.stopPropagation()}
           className={`
             ${styles.modal}
             ${compact ? styles.compact : ''}
@@ -91,8 +83,8 @@ const Modal: FC<{
             </div>}
           {children}
         </div>
-      </CSSTransition>
-    </>
+      </div>
+    </CSSTransition>
   )
 }
 

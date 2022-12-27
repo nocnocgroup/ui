@@ -1,3 +1,5 @@
+@use '../../../styles/colors.style.modules.scss';
+
 .modeSelectorWrapper {
   margin-bottom: 0 !important;
   position: relative;
@@ -19,4 +21,20 @@
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.clear {
+  transition: opacity 0.2s ease-in-out !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  color: colors.$secondary;
+  transform: scale(1.6);
+
+  div {
+    transform: rotate(45deg);
+    font-weight: bold;
+  }
 }

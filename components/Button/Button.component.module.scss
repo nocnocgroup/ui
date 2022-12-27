@@ -11,6 +11,7 @@
   font-family: inherit;
   box-sizing: border-box;
   cursor: pointer;
+  transition: all 0.25s;
 
   &.disabled {
     opacity: 0.5;

@@ -15,7 +15,8 @@ interface Props<T extends string> {
   label?: string
   modes: Mode<T>[]
   mode: T
-  value: string
+  value: string,
+  disabled?: boolean,
   onChange: (mode: T, value: string) => void
 }
 
@@ -24,6 +25,7 @@ const MultipleInput = <T extends string>({
   modes,
   mode,
   value,
+  disabled = false,
   onChange: changeHandler
 }: Props<T>) => {
   const select = useRef<HTMLSelectElement>(null)
@@ -56,11 +58,30 @@ const MultipleInput = <T extends string>({
           type="text"
           value={value}
           onChange={(event) => changeHandler(
-            select.current?.value as T,
-            event.target.value || ''
+            mode,
+            event.target.value
           )}
           placeholder={modes.find(m => m.mode === mode)?.placeholder || ''}
         />
+        <div
+          style={{
+            opacity: value ? '1' : '0',
+            alignSelf: 'center'
+          }}
+          onClick={() => {
+            if (!disabled) {
+              changeHandler(
+                mode,
+                ''
+              )
+            }
+          }}
+          className={styles.clear}
+        >
+          <div>
+            +
+          </div>
+        </div>
       </label>
     </div>
   )
