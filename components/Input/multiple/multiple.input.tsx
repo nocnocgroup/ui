@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import inputStyles from '../Input.component.module.scss'
 
@@ -28,8 +28,26 @@ const MultipleInput = <T extends string>({
   disabled = false,
   onChange: changeHandler
 }: Props<T>) => {
-  const select = useRef<HTMLSelectElement>(null)
+  const modeChangeHandler =
+    (event: ChangeEvent<HTMLSelectElement>) => changeHandler(
+      event.target.value as T,
+      value
+    )
 
+  const valueChangeHandler =
+    (event: ChangeEvent<HTMLInputElement>) => changeHandler(
+      mode,
+      event.target.value
+    )
+
+  const clearHandler = () => {
+    if (!disabled) {
+      changeHandler(
+        mode,
+        ''
+      )
+    }
+  }
   return (
     <div className={inputStyles.outterWrapper}>
       {label && <div className={inputStyles.label}>{label}</div>}
@@ -42,11 +60,7 @@ const MultipleInput = <T extends string>({
         <label className={styles.modeSelectorWrapper}>
           <select
             value={mode}
-            onChange={(event) => changeHandler(
-              event.target.value as T,
-              ''
-            )}
-            ref={select}
+            onChange={modeChangeHandler}
           >
             {modes.map(
               m => <option key={m.mode} value={m.mode}>{m.label}</option>
@@ -57,10 +71,7 @@ const MultipleInput = <T extends string>({
         <input
           type="text"
           value={value}
-          onChange={(event) => changeHandler(
-            mode,
-            event.target.value
-          )}
+          onChange={valueChangeHandler}
           placeholder={modes.find(m => m.mode === mode)?.placeholder || ''}
         />
         <div
@@ -68,14 +79,7 @@ const MultipleInput = <T extends string>({
             opacity: value ? '1' : '0',
             alignSelf: 'center'
           }}
-          onClick={() => {
-            if (!disabled) {
-              changeHandler(
-                mode,
-                ''
-              )
-            }
-          }}
+          onClick={clearHandler}
           className={styles.clear}
         >
           <div>
