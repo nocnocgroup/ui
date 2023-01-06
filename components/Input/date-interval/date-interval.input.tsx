@@ -24,7 +24,6 @@ const DateIntervalInput = ({
   until,
   anytimeLabel = 'anytime',
   intervalSeparator = 'to',
-  // lang = Lang.EN,
   onChangeFrom,
   onChangeUntil
 }: Props) => {
