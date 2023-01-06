@@ -10,6 +10,7 @@ interface Params<T> {
   rows: T[] | null,
   loading: boolean,
   hasMore: boolean | null,
+  loadMoreItemsText?: string,
   onBottomReach: () => void,
   rowKey: (row: T) => Key,
   emptyMessage?: ReactNode,
@@ -20,6 +21,7 @@ const InfinitGrid = <T, >({
   rows,
   loading,
   hasMore,
+  loadMoreItemsText = 'Load more items',
   onBottomReach: bottomReachHandler,
   rowKey,
   emptyMessage
@@ -41,7 +43,7 @@ const InfinitGrid = <T, >({
             loading={loading}
             onClick={bottomReachHandler}
           >
-            Load more items
+            {loadMoreItemsText}
           </Button>
         )}
       </div>
