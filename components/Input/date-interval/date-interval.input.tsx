@@ -4,7 +4,6 @@ import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 
 import inputStyles from '../Input.component.module.scss'
-// import { Lang } from '../../../../../lang/lang.context'
 
 import styles from './styles.date-interval.input.module.scss'
 import calendarIcon from './calendar.svg'
@@ -15,7 +14,6 @@ interface Props {
   until: Date | null,
   anytimeLabel?: string
   intervalSeparator?: string
-  // lang: Lang
   onChangeFrom: (from: Date | null) => void
   onChangeUntil: (until: Date | null) => void
 }
