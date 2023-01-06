@@ -12,6 +12,8 @@ interface Props {
   label?: string
   from: Date | null,
   until: Date | null,
+  anytimeLabel?: string
+  intervalSeparator?: string
   onChangeFrom: (from: Date | null) => void
   onChangeUntil: (until: Date | null) => void
 }
@@ -20,6 +22,8 @@ const DateIntervalInput = ({
   label,
   from,
   until,
+  anytimeLabel = 'anytime',
+  intervalSeparator = 'to',
   onChangeFrom,
   onChangeUntil
 }: Props) => {
@@ -49,7 +53,7 @@ const DateIntervalInput = ({
               `}
             >
               <img src={calendarIcon} className={styles.calendarIcon} alt="" />
-              {from ? format(from, 'PP') : 'anytime'}
+              {from ? format(from, 'PP') : anytimeLabel}
             </div>
             {from && <div
               className={inputStyles.clear}
@@ -58,7 +62,7 @@ const DateIntervalInput = ({
               <div>+</div>
             </div>}
           </div>
-          <div className={styles.separator}>to</div>
+          <div className={styles.separator}>{intervalSeparator}</div>
           <div className={styles.innerWrapper}>
             <div
               onClick={() => {
@@ -71,7 +75,7 @@ const DateIntervalInput = ({
               `}
             >
               <img src={calendarIcon} className={styles.calendarIcon} alt="" />
-              {until ? format(until, 'PP') : 'anytime'}
+              {until ? format(until, 'PP') : anytimeLabel}
             </div>
             {until && <div
               className={inputStyles.clear}
